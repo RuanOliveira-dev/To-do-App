@@ -17,36 +17,47 @@ class Task(db.Model):
 @app.route("/")
 def index():
     tasks = Task.query.all() # Consultando todas as tarefas do banco de dados
-    return render_template("index.html", tasks= tasks)  # Renderizando o template index.html e passando a lista de tarefas para ele
+    return render_template("index.html", tasks = tasks)  # Renderizando o template index.html e passando a lista de tarefas para ele
 
 
 # Método POST para criar uma nova tarefa
 @app.route("/add_task", methods = ["POST"])
 def add_task():
-    description = request.form["description"] # Obtém a descrição da tarefa do formulário
+    new_description = request.form["description"] # Obtém a descrição da tarefa do formulário
     
     # Validar se a tarefa já foi cadastrada
-    task_done = Task.query.filter_by(description=description).first() # Variável que verfica se a tarefa já existe no banco de dados
+    task_done = Task.query.filter_by(description = new_description).first() # Variável que verfica se a tarefa já existe no banco de dados
     if task_done:
         return "Erro! Essa tarefa já existe", 400 # Se a tarefa já existir, retorna um erro 400
     
-    new_task = Task(description=description) # Cria uma nova instância de Task com a descrição fornecida
+    new_task = Task(description = new_description) # Cria uma nova instância de Task com a descrição fornecida
     db.session.add(new_task) # Adiciona as alterações no banco de dados
     db.session.commit() # Efetua as alterações
     return redirect("/") # Redireciona o usuário para a página inicial
 
 
-# Método POST(Recebe o id) para remover uma tarefa
+# Método POST(Envia as informações via formulário) para remover uma tarefa
 @app.route("/delete_task/<int:task_id>", methods = ["POST"])
-def delete_task(task_id):
-    task = Task.query.get(task_id) # Obtém a tarefa pelo ID fornecido
+def delete_task(task_id): 
+    task = Task.query.get(task_id) # Obtém a tarefa com o ID fornecido
     if task:
         db.session.delete(task)
         db.session.commit()
     else:
         return "Tarefa não encontrada", 404
     return redirect("/")    
-    
+
+
+# Método POST(Envia as informações via formulário) para atualizar uma tarefa
+@app.route("/update_task/<int:task_id>", methods = ["POST"])
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    if task:
+        new_description = request.form["description"] # Obtém a nova descrição da tarefa do formulário
+        task.description = new_description # Atualiza a descrição da tarefa
+        db.session.commit()
+        return redirect("/")
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000) # Executa o servidor Flask em modo de depuração
