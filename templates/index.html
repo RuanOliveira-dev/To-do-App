@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list app</title>
 </head>
 <body>
-    <h3>Adicionar nova tarefa</h3>
-    <form action="/add_task" method="post">
-        <input type="text" name="description" required>
-        <button type="submit">
-            Adicionar
-        </button>
-    </form>
+    <div>
+        <h3>Adicionar nova tarefa</h3>
+        <form action="/add_task" method="post">
+            <label for="New Task">
+                Nova tarefa:
+                <input type="text" name="description" required>
+            </label>
+            <button type="submit">
+                Adicionar
+            </button>
+        </form>
+    </div>
     <div>
         <h3>Lista de Tarefas</h3>
         <ul>
             {% for task in tasks %}
-            <li>{{ task.description }}</li> <!-- Tarefa (Apenas a descrição é visível) -->
+            <li>
+                {{ task.description }}<!-- (Apenas a descrição é visível) -->
+                <form action="/delete_task/{{ task.id }}" method="post" style="display: inline">
+                <button type="submit">Apagar</button>
+                </form>
+            </li> 
             {% endfor %}
         </ul>
+    </div>
+    <div>
+        <h3>Editar tarefa</h3>
     </div>
 </body>
 </html>
