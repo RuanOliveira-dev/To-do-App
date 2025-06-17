@@ -7,33 +7,35 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div id="add_task">
-        <h3>Adicionar nova tarefa</h3>
-        <form action="/add_task" method="post">
-            <label for="New_task">
-                Nova tarefa:
-                <input type="text" name="description" required>
-            </label>
-            <button type="submit">
-                Adicionar
-            </button>
-        </form>
-    </div>
-    <div>
-        <h3>Lista de Tarefas</h3>
-        <ul>
-            {% for task in tasks %}
-            <li>
-                <form action="/update_task/{{ task.id  }}" method="post" style="display: inline;">
-                    <input type="text" name="description" value = "{{ task.description }}" required>
-                    <button type="submit">Atualizar</button>
-                </form>
-                <form action="/delete_task/{{ task.id }}" method="post" style="display: inline;">
-                    <button type="submit">Apagar</button>
-                </form>
-            </li> 
-            {% endfor %}
-        </ul>
+    <div id="container">
+        <div id="add_task">
+            <h3 >Adicionar nova tarefa</h3>
+            <form action="/add_task" method="post">
+                <label for="New_task">
+                    Nova tarefa:
+                    <input type="text" name="description" required>
+                </label>
+                <button id="add_button" type="submit">
+                    Adicionar
+                </button>
+            </form>
+        </div>
+        <div id="task_list">
+            <h3>Lista de Tarefas</h3>
+            <ul>
+                {% for task in tasks %}
+                <li>
+                    <form action="/update_task/{{ task.id  }}" method="post" style="display: inline;">
+                        <input type="text" name="description" value = "{{ task.description }}" required>
+                        <button id="update_button" type="submit">Atualizar</button>
+                    </form>
+                    <form action="/delete_task/{{ task.id }}" method="post" style="display: inline;">
+                        <button id="delete_button" type="submit">Apagar</button>
+                    </form>
+                </li> 
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 </html>

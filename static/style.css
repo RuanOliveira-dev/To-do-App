@@ -1,50 +1,88 @@
+/* Resets */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* Reseta o box-sizing para todos os elementos */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
 }
+
+/* Estilizando o corpo da página */
 body {
-    background-color: #f9f9f9;
-    padding: 20px;
-    color: #333;
+    font-family: Arial, sans-serif; /* Define a fonte padrão */
+    background-color: #f4f4f4; /* Define uma cor de fundo suave */
+    margin: 0; /* Remove margens do body */
+    padding: 100px; /* Adiciona preenchimento ao redor das funções principais */
 }
+
+/* Estilizando os títulos */
 h3 {
-    margin-bottom: 10px;
-    color: #444;
+    color: gray; /* Define a cor do título */
+    margin-bottom: 30px; /* Espaçamento abaixo do título */
 }
-div {
-    margin-bottom: 30px;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+
+/* Estilizando as seções principais */
+#add_task, #task_list {
+    background-color: #ffff; /* Define a cor de fundo branca para os blocos */
+    padding: 30px; /* Adiciona preenchimento interno */
+    margin-bottom: 30px; /* Espaçamento entre os blocos */
+    border-radius: 10px; /* Arredonda os cantos dos blocos */
+    box-shadow: 0px 16px 16px  rgba(0,0,0,0.1); /* Adiciona sombra para dar profundidade ao menuzinho */
 }
-form {
-    margin-bottom: 10px;
+
+/* Estilizando a lista de tarefas */
+input {
+    padding: 10px; /* Adiciona preenchimento interno ao campo de entrada */
+    width: 50%; /* Define a largura do campo de entrada */
+    border: 1px solid #c9c9c9; /* Define a borda do campo de entrada */
+    border-radius: 10px; /* Arredonda os cantos do campo de entrada */
 }
-input[type="text"] {
-    padding: 8px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+
+/* Botões de ação */
+#add_button {
+    padding: 10px 12px; /* Adiciona preenchimento interno ao botão */
+    background-color: blue; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto do botão */
+    border: 0px; /* Remove a borda padrão do botão */
+    border-radius: 10px; /* Arredonda os cantos do botão */
+    cursor: pointer; /* Muda o cursor para indicar que aquelete lugar é clicável */
+    margin-left: 10px; /* Espaçamento à esquerda do botão */
 }
-button {
-    padding: 8px 12px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 5px;
+#update_button {
+    padding: 10px 12px; /* Adiciona preenchimento interno ao botão */
+    background-color: green; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto do botão */
+    border: 0px; /* Remove a borda padrão do botão */
+    border-radius: 10px; /* Arredonda os cantos do botão */
+    cursor: pointer; /* Muda o cursor para indicar que aquele lugar é clicável */
+    margin-left: 10px; /* Espaçamento à esquerda do botão */
 }
-button:hover {
-    background-color: #0056b3;
+#delete_button {
+    padding: 10px 12px; /* Adiciona preenchimento interno ao botão */
+    background-color: red; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto do botão */
+    border: 0px; /* Remove a borda padrão do botão */
+    border-radius: 10px; /* Arredonda os cantos do botão */
+    cursor: pointer; /* Muda o cursor para indicar que aquele lugar é clicável */
+    margin-left: 10px; /* Espaçamento à esquerda do botão */
 }
+
+/* Efeito de hover em cada botão */
+#add_button:hover{
+    background-color: darkblue; /* Muda a cor de fundo do bloco ao passar o mouse */
+}
+#update_button:hover{
+    background-color: darkgreen; /* Muda a cor de fundo do bloco ao passar o mouse */
+}
+#delete_button:hover{
+    background-color: darkred; /* Muda a cor de fundo do bloco ao passar o mouse */
+}
+
+/* Resetando espaços da lista */
 ul {
-    list-style-type: none;
-    padding-left: 0;
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0; /* Remove o preenchimento padrão da lista */
 }
+
+/* Estilizando o item de cada */
 li {
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Espaçamento entre os itens da lista */
 }

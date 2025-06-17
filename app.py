@@ -48,7 +48,7 @@ def delete_task(task_id):
 # Método POST(O formulário envia o id para a rota de update) para atualizar uma tarefa
 @app.route("/update_task/<int:task_id>", methods = ["POST"])
 def update_task(task_id):
-    task = Task.query.get(task_id)
+    task = Task.query.get(task_id) # Obtém a tarefa com o ID fornecido via formulário
     
     if task:
         new_description = request.form["description"] # Obtém a nova descrição da tarefa do formulário
