@@ -86,3 +86,16 @@ ul {
 li {
     margin-bottom: 20px; /* Espaçamento entre os itens da lista */
 }
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px; /* Reduz o preenchimento em telas menores */
+    }
+    input {
+        width: 100%; /* Campo de entrada ocupa toda a largura em telas pequenas */
+    }
+    #add_button, #update_button, #delete_button {
+        width: 100%; /* Botões ocupam toda a largura em telas pequenas */
+        margin-top: 10px; /* Espaçamento vertical entre botões */
+    }
+}
