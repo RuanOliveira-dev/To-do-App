@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect # Importando as bibliotecas necessárias do Flask
+from flask_sqlalchemy import SQLAlchemy # Importando a biblioteca SQLAlchemy para interagir com o banco de dados
 
 app = Flask(__name__) # Criando a instância do Flask
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///todo.db" # Configuração do banco de dados SQLite
-
 db = SQLAlchemy(app) # Inicializando a conexão com o banco de dados
 
 
@@ -13,7 +12,7 @@ class Task(db.Model):
     description = db.Column(db.String(100), unique = True, nullable = False) # Definindo a descrição da tarefa como uma string única e não nula
 
 
-#Definindo a rota raíz, que também está associada ao método GET
+#Definindo a rota raíz(main), que também está associada ao método GET
 @app.route("/")
 def index():
     tasks = Task.query.all() # Consultando todas as tarefas do banco de dados
@@ -36,27 +35,28 @@ def add_task():
     return redirect("/") # Redireciona o usuário para a página inicial
 
 
-# Método POST(Envia as informações via formulário) para remover uma tarefa
+# Método POST(O formulário envia o id para a rota de delete) para remover uma tarefa
 @app.route("/delete_task/<int:task_id>", methods = ["POST"])
 def delete_task(task_id): 
-    task = Task.query.get(task_id) # Obtém a tarefa com o ID fornecido
+    task = Task.query.get(task_id) # Obtém a tarefa com o ID fornecido via formulário
     if task:
         db.session.delete(task)
         db.session.commit()
-    else:
-        return "Tarefa não encontrada", 404
     return redirect("/")    
 
 
-# Método POST(Envia as informações via formulário) para atualizar uma tarefa
+# Método POST(O formulário envia o id para a rota de update) para atualizar uma tarefa
 @app.route("/update_task/<int:task_id>", methods = ["POST"])
 def update_task(task_id):
     task = Task.query.get(task_id)
+    
     if task:
         new_description = request.form["description"] # Obtém a nova descrição da tarefa do formulário
-        task.description = new_description # Atualiza a descrição da tarefa
-        db.session.commit()
-        return redirect("/")
+        if new_description == task.description:
+            return "Erro! A tarefa não pode ser a mesma", 400 # Se a nova descrição for igual à atual, retorna um erro 400
+        else:
+            task.description = new_description # Atualiza a descrição da tarefa
+            db.session.commit()
     return redirect("/")
 
 if __name__ == "__main__":

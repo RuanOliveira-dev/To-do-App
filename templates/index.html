@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div>
+    <div id="add_task">
         <h3>Adicionar nova tarefa</h3>
         <form action="/add_task" method="post">
-            <label for="New Task">
+            <label for="New_task">
                 Nova tarefa:
                 <input type="text" name="description" required>
             </label>
@@ -24,15 +24,13 @@
         <ul>
             {% for task in tasks %}
             <li>
-                
                 <form action="/update_task/{{ task.id  }}" method="post" style="display: inline;">
                     <input type="text" name="description" value = "{{ task.description }}" required>
                     <button type="submit">Atualizar</button>
                 </form>
                 <form action="/delete_task/{{ task.id }}" method="post" style="display: inline;">
-                <button type="submit">Apagar</button>
+                    <button type="submit">Apagar</button>
                 </form>
-                
             </li> 
             {% endfor %}
         </ul>
